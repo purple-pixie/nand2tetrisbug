@@ -1,0 +1,7 @@
+/** Test program for Sys static variable testing. */
+class Main {
+    /** Exists just because the Jack spec requires it to */
+    function void main() {
+        return;
+    }
+}

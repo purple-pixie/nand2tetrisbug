@@ -1,0 +1,50 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Sys.jack
+
+/**
+ * A library that supports various program execution services.
+ */
+class Sys {
+    /** Our static testing variable, it should reside at RAM[17]*/
+    static int test;
+
+    /** Performs all the initializations required by the OS. */
+    function void init() {
+        do Memory.init();
+        do Math.init();
+        do Keyboard.init();
+        do Output.init();
+        do Screen.init();
+
+        let test = 666; // this writes into RAM[16], clobbering Keyboard.static[0]
+        do Sys.static_test();
+        do Main.main();
+        do Sys.halt();
+        return;
+    }
+
+    /** This correctly assigns to Sys's static block */
+    function void static_test()
+    {
+        let test = 999; // this correctly writes into RAM[17]
+        return;
+    }
+
+        /** Halts the program execution. */
+    function void halt() {
+        while (true) { }
+        return;
+    }
+
+    /** Simply returns.  */
+    function void wait(int duration) {
+        return;
+    }
+
+    /** Simply returns. */
+    function void error(int errorCode) {
+        return;
+    }
+}
